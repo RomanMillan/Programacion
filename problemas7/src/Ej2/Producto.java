@@ -44,10 +44,7 @@ public class Producto {
 		return precio;
 	}
 
-	public void setPrecio(double precio) throws ProductoException {
-		if (precio <0) {
-			 throw new  ProductoException("00001: Precio inferior a 0");
-		}
+	public void setPrecio(double precio){
 		this.precio = precio;
 	}
 

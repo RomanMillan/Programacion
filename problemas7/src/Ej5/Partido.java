@@ -1,6 +1,6 @@
 package Ej5;
 
-import java.text.ParseException;
+
 import java.util.Objects;
 
 public class Partido {
@@ -11,15 +11,15 @@ public class Partido {
 	private int golesLocal;
 	private int golesVisitante;
 	private char resultadoQuiniela;
+	private boolean jugado;
 	
 	//constructor
-	public Partido(int jornada, Equipo equipoLocal, Equipo equipoVisitante, 
-			char resultadoQuiniela) throws PartidoException {
+	public Partido(int jornada, Equipo equipoLocal, Equipo equipoVisitante) throws PartidoException {
 		super();
 		this.jornada = jornada;
 		setEquipoLocal(equipoLocal);
 		setEquipoVisitante(equipoVisitante);
-		this.resultadoQuiniela = resultadoQuiniela;
+		jugado = false;
 	}
 
 	//metodos
@@ -28,16 +28,44 @@ public class Partido {
 	 * @return
 	 */
 	public void ponerResultado(String resultado)throws PartidoException{
-		
 		int posicion = resultado.indexOf("-");
-		golesLocal = Integer.parseInt(resultado.substring(0, posicion));
-		golesVisitante = Integer.parseInt(resultado.substring(posicion + 1));
-		
-		if (golesLocal > golesVisitante) {
-			equipoLocal.setPartidosGanados(equipoLocal.getPartidosGanados()+1);
-		}else {
-			equipoVisitante.setPartidosGanados(equipoVisitante.getPartidosGanados()+1);
+		//miramos si ha insertardo correctamente el formato de resultados
+		if (posicion == -1) {
+			throw new PartidoException("Error en el formato. num-num");
 		}
+		
+		//intentamos actualizar el resultado, partidos ganados y jugado = true
+		try {
+			golesLocal = Integer.parseInt(resultado.substring(0, posicion));
+			golesVisitante = Integer.parseInt(resultado.substring(posicion + 1));
+			
+			if (golesLocal > golesVisitante) {
+				equipoLocal.setPartidosGanados(equipoLocal.getPartidosGanados()+1);
+			}else {
+				equipoVisitante.setPartidosGanados(equipoVisitante.getPartidosGanados()+1);
+			}
+			
+			resultadoQuiniela = getResultadoQuiniela();
+			jugado = true;
+		} catch (Exception e) {
+			throw new PartidoException("Error de formato debe ser. num-num ");
+		}
+		
+		
+		
+	}
+	
+	/**
+	 * conseguir el resultado de la quiniela
+	 * @return
+	 */
+	public String getResultado() {
+		String resultado;
+		if(!jugado) resultado ="";
+		else if (golesLocal == golesVisitante) resultado = "X";
+		else if (golesLocal  > golesVisitante) resultado = "1";
+		else resultado = "2";
+		return resultado;
 	}
 	
 	//get y set
@@ -120,9 +148,9 @@ public class Partido {
 
 	//toString
 	
-	public String toString(boolean acabado) {
+	public String toString() {
 		String respuesta = "";
-		if (acabado != true) {
+		if (jugado != true) {
 			respuesta = "Partido entre equipo local " + equipoLocal.getNombre() + " y el equipo"
 					+ " visitante " + equipoVisitante.getNombre() + " todavia no se ha jugado";
 		}else {

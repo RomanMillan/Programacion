@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"Ej5","l":"Equipo"},{"p":"Ej5","l":"EquipoException"},{"p":"Ej5","l":"MainPartido"},{"p":"Ej5","l":"Partido"},{"p":"Ej5","l":"PartidoException"}];updateSearchResults();

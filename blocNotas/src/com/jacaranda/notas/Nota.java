@@ -3,7 +3,7 @@ package com.jacaranda.notas;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class Nota implements Comparable {
+public class Nota implements Comparable <Nota>{
 
 	private static int codigoSiguiente;
 	private int codigo =0;
@@ -77,28 +77,7 @@ public class Nota implements Comparable {
 		return fechaUltimaModificacion;
 	}
 
-	public int compareTo(Object nota) {
-		int resultado = 0;
-		Nota notaAcomparar = (Nota) nota;
-		if(this.codigo>notaAcomparar.getCodigo()) {
-			resultado = 1;
-		}else if(this.codigo<notaAcomparar.getCodigo()) {
-			resultado = -1;
-		}
-		return resultado;
-	}
-	
-//	public int compareTo(Object nota) {
-//		int resultado = 0;
-//		Nota notaAcomparar = (Nota) nota;
-//		if(this.texto.equalsIgnoreCase(notaAcomparar.getTexto())) {
-//			resultado = 1;
-//		}else if(this.codigo<notaAcomparar.getCodigo()) {
-//			resultado = -1;
-//		}
-//		return resultado;
-//	}
-//	
+
 	//hashCode and Equals
 	@Override
 	public int hashCode() {
@@ -123,10 +102,13 @@ public class Nota implements Comparable {
 		return "Nota [ codigo=" + codigo + ", texto=" + texto
 				+ ", fechaCreacion=" + fechaCreacion + ", fechaUltimaModificacion=" + fechaUltimaModificacion + "]";
 	}
-	
-	//TODO PREGUNTAR QUE HAY QUE HACER
-	public int compareTo(Nota notaAcomparar) {
-		return -1;
+
+	@Override
+	public int compareTo(Nota o) {
+		
+		return 0;
 	}
+
+	
 	
 }

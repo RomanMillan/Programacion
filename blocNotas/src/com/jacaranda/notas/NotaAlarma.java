@@ -57,5 +57,8 @@ public class NotaAlarma extends Nota implements Activable {
 				+ activado + "]";
 	}
 	
-	
+//	public NotaAlarma clone() {
+//		Nota resultado = super.clone();
+//		NotaAlarma n2 = new NotaAlarma(super.getTexto());
+//	}
 }

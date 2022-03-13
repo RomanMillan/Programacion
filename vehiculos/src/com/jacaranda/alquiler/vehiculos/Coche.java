@@ -7,12 +7,14 @@ public class Coche extends Vehiculo {
 
 	private CarburanteEnum carburante;
 
-	public Coche(String matricula, String gama, LocalDate fechaSalida, String carburante)
-			throws VehiculoException {
+	//constructor
+	public Coche(String matricula, String gama, LocalDate fechaSalida, 
+			String carburante) throws VehiculoException {
 		super(matricula, gama, fechaSalida);
-		this.carburante = CarburanteEnum.valueOf(carburante.toUpperCase(null));
+		this.carburante = CarburanteEnum.valueOf(carburante.toUpperCase());
 	}
 
+	//getter and setter
 	public CarburanteEnum getCarburante() {
 		return carburante;
 	}
@@ -21,15 +23,17 @@ public class Coche extends Vehiculo {
 		this.carburante = CarburanteEnum.valueOf(carburante.toUpperCase());
 	}
 
+	//toString
 	@Override
 	public String toString() {
 		return "Coche [carburante=" + carburante + "] " + super.toString();
 	}
 	
+	//metodos
 	@Override
 	public double getPrecio() {
-		return super.getPrecio()  + this.carburante.getPrecio() *
-				this.getFechaEntrada().until(getFechaSalida(),ChronoUnit.DAYS);
+		return (super.getPrecio()  + this.carburante.getPrecio()) *
+				this.getFechaSalida().until(getFechaEntrada(),ChronoUnit.DAYS);
 	}
 	
 }

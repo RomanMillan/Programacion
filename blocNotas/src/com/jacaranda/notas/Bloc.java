@@ -35,11 +35,13 @@ public class Bloc {
 	 * @throws BlocExection Si el bloc está lleno
 	 */
 	public void agregarNota(Nota notaAagregar) throws BlocExection {
-		if(numNotas== NUMERO_NOTAS_MAXIMA)
+		if(numNotas== NUMERO_NOTAS_MAXIMA) {
 			throw new BlocExection("Bloc de notas llenos");
-		else
+		}	
+		else {
 			listaNota[numNotas] = notaAagregar;
 			numNotas++;
+		}	
 	}
 	
 	/**
@@ -98,7 +100,7 @@ public class Bloc {
 		}
 	}
 	
-	
+	//ordena la lista de notas (notas y fechas)
 	public String ordenaBloc() {
 		Nota notasOrdenar[] = new Nota[numNotas];
 		String salida = "";
@@ -134,7 +136,8 @@ public class Bloc {
 	//toString
 	@Override
 	public String toString() {
-		return "Bloc [numNotas=" + numNotas + ", nombre=" + nombre + ", listaNota=" + Arrays.toString(listaNota) + "]";
+		return "Bloc [numNotas=" + numNotas + ", nombre=" + nombre + ", listaNota=" + 
+	Arrays.toString(listaNota) + "] \n";
 	}
 	
 	

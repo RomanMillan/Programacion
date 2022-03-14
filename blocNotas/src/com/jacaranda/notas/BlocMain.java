@@ -2,6 +2,7 @@ package com.jacaranda.notas;
 
 import java.time.LocalDateTime;
 
+
 public class BlocMain {
 
 	public static void main(String[] args) {
@@ -29,7 +30,7 @@ public class BlocMain {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-
+		
 		//activamos la alarma a una nota de tipo alarma
 		try {
 			b1.activa(1);
@@ -44,11 +45,11 @@ public class BlocMain {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		System.out.println(n2.toString());
-		//mostramos el nombre del bloc
+		
+		//mostramos el bloc sin ordenar
 		System.out.println(b1.toString());
 		
-		
+		//Ordenamos y mostramos el bloc
 		System.out.println(b1.ordenaBloc());
 
 	}

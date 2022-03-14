@@ -26,7 +26,7 @@ public class Principal {
 					String gama = leerString("Inserte la gama: ");
 					int fechaDia= leerInt("Inserta el dia: ");
 					int fechaMes= leerInt("Inserta el mes: ");
-					int fechaAnno= leerInt("Inserta el año: ");
+					int fechaAnno= leerInt("Inserta el aÃ±o: ");
 					String carburante = leerString("Inserta el tipo de carburante");
 					
 					try {
@@ -41,7 +41,7 @@ public class Principal {
 					String gama = leerString("Inserte la gama: ");
 					int fechaDia= leerInt("Inserta el dia: ");
 					int fechaMes= leerInt("Inserta el mes: ");
-					int fechaAnno= leerInt("Inserta el año: ");
+					int fechaAnno= leerInt("Inserta el aÃ±o: ");
 					int numPlazas = leerInt("Inserta el numero de plazas ");
 					
 					try {
@@ -57,7 +57,7 @@ public class Principal {
 					String gama = leerString("Inserte la gama: ");
 					int fechaDia= leerInt("Inserta el dia: ");
 					int fechaMes= leerInt("Inserta el mes: ");
-					int fechaAnno= leerInt("Inserta el año: ");
+					int fechaAnno= leerInt("Inserta el aÃ±o: ");
 					double pMA = leerDouble("Inserta el peso maximo autorizado: ");
 					
 					try {
@@ -84,7 +84,7 @@ public class Principal {
 						}
 					}
 					if (encontrado == true) {
-						System.out.println(listaVehiculos[posicion].getPrecio() + "€");
+						System.out.println(listaVehiculos[posicion].getPrecio() + "â‚¬");
 					}else {
 						System.out.println("La matricula no ha sido encontrada.");
 					}
@@ -100,33 +100,13 @@ public class Principal {
 			}
 			
 		}while(opc !=3);
-		
-		
-//		Vehiculo v = null;
-//		Vehiculo coche = null;
-//		try {
-//			v = new Vehiculo("4567gpz", "Baja",LocalDate.of(2022, 5,20) );	
-//		} catch (Exception e) {
-//			System.out.println(e.getMessage());
-//		}
-//		
-//		System.out.println(v);
-//		
-//		try {
-//			coche = new Coche("44778DM", "Media", LocalDate.of(2022, 4, 4),"Gasolina");
-//		} catch (VehiculoException e) {
-//			System.out.println(e.getMessage());
-//		}
-//
-//		System.out.println(coche.toString());
-//		System.out.println(((Coche) coche).getPrecio());
 	}
 
 	
 	public static void menu() {
 		System.out.println("\n"
-				+ "1. Alta de vehículo: \n"
-				+ "2. Cálculo de precio de alquiler \n"
+				+ "1. Alta de vehï¿½culo: \n"
+				+ "2. Cï¿½lculo de precio de alquiler \n"
 				+ "3. Salir"
 				+ "\n");
 	}

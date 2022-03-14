@@ -14,6 +14,7 @@ public class NotaAlarma extends Nota implements Activable {
 		super(texto);
 		setFechaAlarma(fecha);
 		this.activado = activado;
+		minutosRepetir = MINUTOS_REPETIR_POR_DEFECTO;
 	}
 
 	public NotaAlarma(String texto, LocalDateTime fechaAlarma, int minutosRepetir) {
@@ -24,11 +25,14 @@ public class NotaAlarma extends Nota implements Activable {
 	}
 
 	//getter and setter
-	public static int getMinutosRepetirPorDefecto() {
+	public static int getMINUTOS_REPETIR_POR_DEFECTO() {
 		return MINUTOS_REPETIR_POR_DEFECTO;
 	}
 
 	private void setFechaAlarma(LocalDateTime fechaAlarma) throws NotaAlarmaExecption {
+		if(fechaAlarma == null) {
+			throw new NotaAlarmaExecption("La fecha de alarma no puede ser nula");
+		}
 		if(super.getFechaCreacion().isAfter(fechaAlarma)) {
 			throw new NotaAlarmaExecption("La fecha de alarma no es valida.");
 		}else {
@@ -56,9 +60,19 @@ public class NotaAlarma extends Nota implements Activable {
 		return super.toString() + "NotaAlarma [fechaAlarma=" + fechaAlarma + ", minutosRepetir=" + minutosRepetir + ", activado="
 				+ activado + "]";
 	}
-	
-//	public NotaAlarma clone() {
-//		Nota resultado = super.clone();
-//		NotaAlarma n2 = new NotaAlarma(super.getTexto());
-//	}
+
+	@Override
+	public NotaAlarma clone() throws CloneNotSupportedException {
+		NotaAlarma nueva = null;
+		try {
+			nueva = new NotaAlarma(getTexto(), fechaAlarma, activado);
+			nueva.setCodigo(getCodigo());
+			nueva.setFechaCreacion(getFechaCreacion());
+			nueva.setFechaUltimaModificacion(getFechaUltimaModificacion());
+		} catch (NotaAlarmaExecption e) {
+			throw new CloneNotSupportedException("Imposible clonar");
+		}
+		return nueva;
+	}
+
 }

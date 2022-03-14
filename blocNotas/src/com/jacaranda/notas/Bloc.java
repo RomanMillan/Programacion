@@ -101,14 +101,16 @@ public class Bloc {
 	
 	public String ordenaBloc() {
 		Nota notasOrdenar[] = new Nota[numNotas];
+		String salida = "";
 		for(int i = 0;i<numNotas;i++) {
 			notasOrdenar[i] = this.listaNota [i];
 		}
-		numNotas++;
 		Arrays.sort(notasOrdenar);
 		
-		return notasOrdenar.toString();
-		
+		for (int i=0;i<numNotas;i++) {
+			salida += notasOrdenar[i] + "\n";
+		}
+		return salida;
 	}
 	
 	//hashcode and equals

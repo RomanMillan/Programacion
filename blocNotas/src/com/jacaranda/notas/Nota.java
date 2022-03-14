@@ -37,7 +37,7 @@ public class Nota implements Comparable <Nota>{
 	 */
 	public boolean isEmpty() {
 		boolean empty = false;
-		if (texto.equals(""))
+		if (texto.isEmpty())
 			empty = true;
 		return empty;
 	}
@@ -63,6 +63,7 @@ public class Nota implements Comparable <Nota>{
 
 	public void setTexto(String texto) {
 		this.texto = texto;
+		this.fechaUltimaModificacion = LocalDateTime.now();
 	}
 
 	public int getCodigo() {
@@ -77,6 +78,18 @@ public class Nota implements Comparable <Nota>{
 		return fechaUltimaModificacion;
 	}
 
+
+	protected void setCodigo(int codigo) {
+		this.codigo = codigo;
+	}
+
+	protected void setFechaCreacion(LocalDateTime fechaCreacion) {
+		this.fechaCreacion = fechaCreacion;
+	}
+
+	protected void setFechaUltimaModificacion(LocalDateTime fechaUltimaModificacion) {
+		this.fechaUltimaModificacion = fechaUltimaModificacion;
+	}
 
 	//hashCode and Equals
 	@Override
@@ -105,10 +118,16 @@ public class Nota implements Comparable <Nota>{
 
 	@Override
 	public int compareTo(Nota o) {
-		
-		return 0;
+		int resultado;
+		if(o == null) {
+			resultado = -1;
+		}else {
+			resultado = this.texto.compareToIgnoreCase(o.texto);
+			if (resultado == 0) {
+				resultado = this.fechaCreacion.compareTo(o.fechaCreacion);
+			}
+		}
+		return resultado;
 	}
 
-	
-	
 }

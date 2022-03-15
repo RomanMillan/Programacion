@@ -1,5 +1,7 @@
 package com.jacaranda.notas;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -43,6 +45,15 @@ public class Bloc {
 			numNotas++;
 		}	
 	}
+	
+//	public void addNota(String desripcion, LocalDateTime fechaAlarma, boolean activado) {
+//		if(numNotas== NUMERO_NOTAS_MAXIMA) {
+//			throw new BlocExection("Bloc de notas llenos");
+//			
+//			listaNota[numNotas] = new NotaAlarma(desripcion, fechaAlarma, activado);
+//		}
+//	}
+	
 	
 	/**
 	 * Obtiene la cadena de texto de la nota
@@ -103,16 +114,17 @@ public class Bloc {
 	//ordena la lista de notas (notas y fechas)
 	public String ordenaBloc() {
 		Nota notasOrdenar[] = new Nota[numNotas];
-		String salida = "";
+		StringBuilder salida = new StringBuilder();
+		
 		for(int i = 0;i<numNotas;i++) {
 			notasOrdenar[i] = this.listaNota [i];
 		}
 		Arrays.sort(notasOrdenar);
 		
 		for (int i=0;i<numNotas;i++) {
-			salida += notasOrdenar[i] + "\n";
+			salida.append(notasOrdenar[i]);
 		}
-		return salida;
+		return salida.toString();
 	}
 	
 	//hashcode and equals

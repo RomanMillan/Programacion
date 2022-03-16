@@ -1,7 +1,5 @@
 package com.jacaranda.notas;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -45,14 +43,6 @@ public class Bloc {
 			numNotas++;
 		}	
 	}
-	
-//	public void addNota(String desripcion, LocalDateTime fechaAlarma, boolean activado) {
-//		if(numNotas== NUMERO_NOTAS_MAXIMA) {
-//			throw new BlocExection("Bloc de notas llenos");
-//			
-//			listaNota[numNotas] = new NotaAlarma(desripcion, fechaAlarma, activado);
-//		}
-//	}
 	
 	
 	/**

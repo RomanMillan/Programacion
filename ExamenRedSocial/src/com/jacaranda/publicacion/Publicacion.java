@@ -27,10 +27,15 @@ public abstract class Publicacion implements Valorable{
 	//metodos 
 	protected abstract void setTexto(String texto) throws PublicacionException;
 	
-	public boolean valorar(String valoracion) {
-		 Valoraciones puntValoracion = Valoraciones.valueOf(valoracion.toUpperCase());
-		 this.valoracion += puntValoracion.getValoracion();
-		return true;
+	public boolean valorar(String valoracion) throws PublicacionException {
+		try {
+			Valoraciones puntValoracion = Valoraciones.valueOf(valoracion.toUpperCase());
+			 this.valoracion += puntValoracion.getValoracion();
+			return true;	
+		} catch (Exception e) {
+			throw new PublicacionException("No es correcta la valoracion");
+		} 
+		
 	}
 	
 	//getter and setter

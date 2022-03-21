@@ -38,6 +38,25 @@ public class MemoryStorage {
 		}
 	}
 	
+/*	
+	private <I> int posicionElemento(I[] array,I elemento, int longitud) {
+		int resultado = -1;
+		for(int i=0;i<longitud && resultado== -1;i++) {
+			if(array.equals(elemento)) {
+			
+				return resultado = i;
+			}
+		}
+		return resultado;
+	}
+	
+	public void addPublicacion(String texto, String login) throws PublicacionException {
+		Usuario aux = new Usuario(login, null);
+		int posicion = posicionElemento(this.usuarios, aux, this.numPublicacionesActuales);
+		Publicacion paux = new Tweet(texto, this.usuarios[posicion]);
+		int posicionPublicacion = posicionElemento(this.publicaciones, paux,this.numPublicacionesActuales);
+	}
+*/	
 	//agrega un usuario al array de usuarios
 	public void addUsuario(String login, String pass) {
 		if(numUsuarioActuales< NUM_MAXIMO_USUARIOS) {
@@ -46,7 +65,7 @@ public class MemoryStorage {
 		}
 	}
 	
-	//añade publicacion (tweet)
+	//aÃ±ade publicacion (tweet)
 	public void addPublicacion(String texto,String login) {
 		int posicion = posicionUsuario(login);
 		
@@ -60,7 +79,7 @@ public class MemoryStorage {
 		}
 	}
 	
-	//añade publicacion (post)
+	//aÃ±ade publicacion (post)
 	public void addPublicacion(String texto,String login, String tema) {
 		int posicion = posicionUsuario(login);
 		
@@ -74,7 +93,7 @@ public class MemoryStorage {
 		}
 	}
 	
-	//añade publicacion (recomendacion)
+	//aÃ±ade publicacion (recomendacion)
 	public void addPublicacion(String texto,String login, int numEstrellas) {
 		int posicion = posicionUsuario(login);
 		
@@ -93,9 +112,15 @@ public class MemoryStorage {
 		return "";
 	}
 	
+	//mostrar los tweets
 	public String mostrarTweets() {
-		publicaciones[i].getTexto();
-		return "";
+		StringBuilder listaTweets = new StringBuilder();
+		for(int i=0;i<numPublicacionesActuales;i++) {
+			if (publicaciones[i] instanceof Tweet) {	
+				listaTweets.append(publicaciones[i]+"\n");
+			}
+		}
+		return listaTweets.toString();
 	}
 	
 	

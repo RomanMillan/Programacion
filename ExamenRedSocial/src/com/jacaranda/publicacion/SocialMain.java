@@ -1,6 +1,9 @@
 package com.jacaranda.publicacion;
 
+
+import com.jacaranda.memoryStorage.MemoryStorage;
 import com.jacaranda.usuario.Usuario;
+
 
 public class SocialMain {
 
@@ -61,6 +64,11 @@ public class SocialMain {
 			System.out.println(e.getMessage());
 		}
 		System.out.println("valoracion post: "+ p1.getValoracion());
+		
+		
+		
+		
+		
 		
 	}
 

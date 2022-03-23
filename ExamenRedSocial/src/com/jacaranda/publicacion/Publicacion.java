@@ -5,7 +5,7 @@ import java.util.Objects;
 
 import com.jacaranda.usuario.Usuario;
 
-public abstract class Publicacion implements Valorable{
+public abstract class Publicacion implements Valorable, Comparable<Publicacion>{
 
 	protected String texto;
 	private LocalDateTime fechaCreacion;
@@ -36,6 +36,27 @@ public abstract class Publicacion implements Valorable{
 			throw new PublicacionException("No es correcta la valoracion");
 		} 
 		
+	}
+	
+	//TODO ordenar las publicaciones
+	public int compareTo(Publicacion o) {
+		if(getValoracion() < o.getValoracion())
+			return -1;
+		else if (getValoracion()>o.getValoracion())
+			return 1;
+		else
+			if(isAnterior(o))
+				return -1;
+			else
+				return 1;
+	}
+	
+	//mira si la fecha es anterior o posterior.
+	public boolean isAnterior(Publicacion pAcomparar) {
+		boolean esAnterior = false;
+		if(this.fechaCreacion.equals(pAcomparar.fechaCreacion))
+			esAnterior = true;
+		return esAnterior;
 	}
 	
 	//getter and setter
@@ -77,7 +98,7 @@ public abstract class Publicacion implements Valorable{
 		return Objects.equals(fechaCreacion, other.fechaCreacion) && Objects.equals(texto, other.texto);
 	}
 
-
+	//toString
 	@Override
 	public String toString() {
 		return "Publicación" + texto + ". Realizada por: " + getLoginUsuario()

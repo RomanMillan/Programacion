@@ -23,19 +23,13 @@ public class MemoryStorage {
 	
 	// busca la posicion del usuario en el array
 	private int posicionUsuario(String login) {
-		boolean encontrado = false;
 		int posicion = -1;
-		for(int i=0;i<numUsuarioActuales && encontrado== false;i++) {
+		for(int i=0;i<numUsuarioActuales && posicion !=-1;i++) {
 			if(usuarios[i].getLogin().equals(login)) {
-				encontrado = true;
 				posicion = i;
 			}
 		}
-		if(encontrado == true) {
-			return posicion;
-		}else {
-			return posicion;
-		}
+		return posicion;
 	}
 	
 /*	
@@ -66,9 +60,13 @@ public class MemoryStorage {
 	}
 	
 	//añade publicacion (tweet)
-	public void addPublicacion(String texto,String login) {
+	public void addPublicacion(String texto,String login) throws MemoryStorageexception {
+		//buscamos la posicion del usuario
 		int posicion = posicionUsuario(login);
-		
+		if(posicion==-1) {
+			throw new MemoryStorageexception("Usuario no encontrado.");
+		}
+		//insertamos el tweets en la lista de publicaciones
 		if(numPublicacionesActuales<NUM_MAXIMO_PUBLICACIONES) {
 			try {
 				publicaciones[numUsuarioActuales] = new Tweet(texto, usuarios[posicion]);
@@ -80,9 +78,13 @@ public class MemoryStorage {
 	}
 	
 	//añade publicacion (post)
-	public void addPublicacion(String texto,String login, String tema) {
-		int posicion = posicionUsuario(login);
-		
+	public void addPublicacion(String texto,String login, String tema) throws MemoryStorageexception {
+		//buscamos la posicion del usuario
+				int posicion = posicionUsuario(login);
+				if(posicion==-1) {
+					throw new MemoryStorageexception("Usuario no encontrado.");
+				}
+		//insertamos el post en la lista de publicaciones
 		if(numPublicacionesActuales<NUM_MAXIMO_PUBLICACIONES) {
 			try {
 				publicaciones[numUsuarioActuales] = new Post(texto, usuarios[posicion], tema);
@@ -94,9 +96,13 @@ public class MemoryStorage {
 	}
 	
 	//añade publicacion (recomendacion)
-	public void addPublicacion(String texto,String login, int numEstrellas) {
-		int posicion = posicionUsuario(login);
-		
+	public void addPublicacion(String texto,String login, int numEstrellas) throws MemoryStorageexception {
+		//buscamos la posicion del usuario
+				int posicion = posicionUsuario(login);
+				if(posicion==-1) {
+					throw new MemoryStorageexception("Usuario no encontrado.");
+				}
+		//insertamos la recomendacion en la lista de publicaciones
 		if(numPublicacionesActuales<NUM_MAXIMO_PUBLICACIONES) {
 			try {
 				publicaciones[numUsuarioActuales] = new Recomendacion(texto, usuarios[posicion], numEstrellas);
@@ -107,10 +113,15 @@ public class MemoryStorage {
 		}
 	}
 	
-	
+	//mostrar las publicaciones
 	public String mostrarListaPublicaciones() {
-		return "";
+		StringBuilder listaPublicaciones = new StringBuilder();
+		for(int i=0;i<numPublicacionesActuales;i++) {
+			listaPublicaciones.append(publicaciones[i]+"\n");
+		}
+		return listaPublicaciones.toString();
 	}
+	
 	
 	//mostrar los tweets
 	public String mostrarTweets() {
@@ -121,6 +132,29 @@ public class MemoryStorage {
 			}
 		}
 		return listaTweets.toString();
+	}
+	
+	
+	//mostrar los post
+	public String mostrarPots() {
+		StringBuilder listaPost = new StringBuilder();
+		for(int i=0;i<numPublicacionesActuales;i++) {
+			if (publicaciones[i] instanceof Post) {	
+				listaPost.append(publicaciones[i]+"\n");
+			}
+		}
+		return listaPost.toString();
+	}
+	
+	//mostrar las recomencaciones
+	public String mostrarRecomendacion() {
+		StringBuilder listaRecomendacion = new StringBuilder();
+		for(int i=0;i<numPublicacionesActuales;i++) {
+			if (publicaciones[i] instanceof Recomendacion) {	
+				listaRecomendacion.append(publicaciones[i]+"\n");
+			}
+		}
+		return listaRecomendacion.toString();
 	}
 	
 	

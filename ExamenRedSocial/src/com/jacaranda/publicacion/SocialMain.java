@@ -1,14 +1,11 @@
 package com.jacaranda.publicacion;
 
-
-import com.jacaranda.memoryStorage.MemoryStorage;
 import com.jacaranda.usuario.Usuario;
-
 
 public class SocialMain {
 
 	public static void main(String[] args) {
-		
+
 		//creacion de usuario
 		Usuario u1 = new Usuario("Nkixk", "161dfa_kk");
 		
@@ -24,7 +21,7 @@ public class SocialMain {
 		//crear un tweet
 		Publicacion t1 = null;
 		try {
-			t1 = new Tweet("La mañana es fria", u1);
+			t1 = new Tweet("La maï¿½ana es fria", u1);
 		} catch (PublicacionException e) {
 			System.out.println(e.getMessage());
 		}

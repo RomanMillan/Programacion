@@ -1,6 +1,7 @@
 package com.jacaranda.equipo;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import com.jacaranda.jugadores.Alumno;
@@ -50,16 +51,15 @@ public class Equipo {
 	}
 	
 	
-	//añadir un equipo al equipo
-	public void unionEquipo(Equipo equipo) {
-		Equipo resultado = new Equipo("");
+	//unir un equipo al equipo sin repetir
+	public Equipo unionEquipo(Equipo equipo) {
+		Equipo resultado = new Equipo("Union de los dos equipos");
 		for(Alumno a: listado) {
 			if(equipo.listado.contains(a)) {
 				try {
 					resultado.addAlumno(a);
 				} catch (EquipoException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.out.println(e.getMessage());
 				}
 			}
 		}
@@ -67,9 +67,35 @@ public class Equipo {
 		return resultado;
 	}
 	
+	
+	
+	
 	//para saber cuantos alumnos tiene el equipo
 	public int numAlumnos() {
 		return this.listado.size();
+	}
+	
+	
+	
+	/*
+	 * borrar todos los alumnos que se llamen igual.
+	 * */
+	public boolean delUnAlumno(String nombre) {
+		boolean encontrado = false;
+		Iterator<Alumno> siguente = listado.iterator();
+		
+		while(siguente.hasNext()&&!encontrado) {
+			Alumno a = siguente.next();
+			if(a.getNombre().equalsIgnoreCase(nombre)) {
+				listado.remove(a);
+				encontrado = true;
+			}
+		}
+		return encontrado;
+	}
+	
+	public void delAlumno(String nombre) {
+		while(delUnAlumno(nombre)==true);
 	}
 	
 	//toString
@@ -79,7 +105,5 @@ public class Equipo {
 	}
 	
 
-	
-	
 	
 }

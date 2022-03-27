@@ -4,21 +4,31 @@ public class Principal {
 
 	public static void main(String[] args) {
 		
-		Pueblo p1;
+		//crear provincia.
+		Provincia pr1=null;
 		try {
-			p1 = new Pueblo("Tordesilla", "856472");
-			System.out.println(p1.toString());
-		} catch (PuebloException e) {
+			pr1 = new Provincia("sevilla", "55555");
+		} catch (ProvinciaException e1) {
+			System.out.println(e1.getMessage());
+		}
+		
+		//añado un pueblo
+		try {
+			pr1.addPueblo("brenes", "11111", 4, 59, 88);
+		} catch (ProvinciaException | PuebloException e) {
 			System.out.println(e.getMessage());
 		}
 		
+		
+		//añado otro pueblo
 		try {
-			p1 = new Pueblo("Tocina", "1564847", 4, 25025, 4000);
-			System.out.println(p1.toString());
-		} catch (PuebloException e) {
+			pr1.addPueblo("santiago", "22222", 10, 20, 156);
+		} catch (ProvinciaException | PuebloException e) {
 			System.out.println(e.getMessage());
 		}
-
+		System.out.println(pr1.listadoNombresPueblos());
+		System.out.println(pr1.delPueblo("brsenes"));
+		System.out.println(pr1.listadoNombresPueblos());
 	}
 
 }

@@ -2,22 +2,23 @@ package com.jacaranda.utilities;
 
 import java.util.Objects;
 
-public class Pueblo {
+public class Pueblo implements Comparable<Pueblo> {
 
 	private String nombre;
 	private String codigo;
 	private int numeroHabitantes;
 	private double rentaPerCapita;
 	private double superficie;
-	
-	//constructores
-	public Pueblo(String nombre, String codigo, int numeroHabitantes, double rentaPerCapita, double superficie) throws PuebloException {
+
+	// constructores
+	public Pueblo(String nombre, String codigo, int numeroHabitantes, double rentaPerCapita, double superficie)
+			throws PuebloException {
 		super();
 		setNombre(nombre);
 		setCodigo(codigo);
 		setNumeroHabitantes(numeroHabitantes);
 		setRentaPerCapita(rentaPerCapita);
-		this.superficie = superficie;
+		setSuperficie(superficie);
 	}
 
 	public Pueblo(String nombre, String codigo) throws PuebloException {
@@ -26,7 +27,7 @@ public class Pueblo {
 		setCodigo(codigo);
 	}
 
-	//getter and setter
+	// getter and setter
 	public String getNombre() {
 		return nombre;
 	}
@@ -39,17 +40,17 @@ public class Pueblo {
 		return codigo;
 	}
 
-	public void setCodigo(String codigo) throws PuebloException {
-		if(codigo.length()>=5) {
-			for(int i= 0;i<codigo.length()-1;i++) {
-				if(codigo.charAt(i)< 48 || codigo.charAt(i)>57) {
+	private void setCodigo(String codigo) throws PuebloException {
+		if (codigo.length() >= 5) {
+			for (int i = 0; i < codigo.length() - 1; i++) {
+				if (codigo.charAt(i) < 48 || codigo.charAt(i) > 57) {
 					throw new PuebloException("El codigo debe ser numerico");
 				}
-			this.codigo = codigo;
+				this.codigo = codigo;
 			}
-		}else {
+		} else {
 			throw new PuebloException("El codigo debe ser mayor o igual que 5");
-		}	
+		}
 	}
 
 	public int getNumeroHabitantes() {
@@ -57,7 +58,7 @@ public class Pueblo {
 	}
 
 	public void setNumeroHabitantes(int numeroHabitantes) throws PuebloException {
-		if(numeroHabitantes < 0) {
+		if (numeroHabitantes < 0) {
 			throw new PuebloException("El numero de habitantes no puede ser negativo");
 		}
 		this.numeroHabitantes = numeroHabitantes;
@@ -68,7 +69,7 @@ public class Pueblo {
 	}
 
 	public void setRentaPerCapita(double rentaPerCapita) throws PuebloException {
-		if(rentaPerCapita < 0) {
+		if (rentaPerCapita < 0) {
 			throw new PuebloException("La renta no puede ser negativo");
 		}
 		this.rentaPerCapita = rentaPerCapita;
@@ -78,11 +79,14 @@ public class Pueblo {
 		return superficie;
 	}
 
-	public void setSuperficie(double superficie) {
+	public void setSuperficie(double superficie) throws PuebloException {
+		if (superficie < 0) {
+			throw new PuebloException("La superficie no puede ser negativa");
+		}
 		this.superficie = superficie;
 	}
 
-	//hasCode and equals
+	// hasCode and equals
 	@Override
 	public int hashCode() {
 		return Objects.hash(codigo);
@@ -100,13 +104,17 @@ public class Pueblo {
 		return Objects.equals(codigo, other.codigo);
 	}
 
-	//toString
+	// toString
 	@Override
 	public String toString() {
-		return "Pueblo [nombre=" + nombre + ", codigo=" + codigo + ", numeroHabitantes=" + numeroHabitantes
-				+ ", reantaPerCapita=" + rentaPerCapita + ", superficie=" + superficie + "]";
+		return "Pueblo [nombre=" + nombre + ", codigo=" + codigo + ", " + "numeroHabitantes=" + numeroHabitantes
+				+ ", reantaPerCapita=" + rentaPerCapita + ", superficie=" + superficie + "]\n";
 	}
-	
-	
-	
+
+	@Override
+	public int compareTo(Pueblo o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

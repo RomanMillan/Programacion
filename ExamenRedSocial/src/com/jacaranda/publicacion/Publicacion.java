@@ -38,7 +38,6 @@ public abstract class Publicacion implements Valorable, Comparable<Publicacion>{
 		
 	}
 	
-	//TODO ordenar las publicaciones
 	public int compareTo(Publicacion o) {
 		if(getValoracion() < o.getValoracion())
 			return -1;
@@ -80,7 +79,7 @@ public abstract class Publicacion implements Valorable, Comparable<Publicacion>{
 		return valoracion;
 	}
 
-	//hashCode and Equals (fechaCreación y texto)
+	//hashCode and Equals (fechaCreaciï¿½n y texto)
 	@Override
 	public int hashCode() {
 		return Objects.hash(fechaCreacion, texto);
@@ -101,8 +100,8 @@ public abstract class Publicacion implements Valorable, Comparable<Publicacion>{
 	//toString
 	@Override
 	public String toString() {
-		return "Publicación" + texto + ". Realizada por: " + getLoginUsuario()
-		+ ". Valoración: " + getValoracion() + ". Fecha de publicacion: " + getFechaCreacion();
+		return "Publicaciï¿½n" + texto + ". Realizada por: " + getLoginUsuario()
+		+ ". Valoraciï¿½n: " + getValoracion() + ". Fecha de publicacion: " + getFechaCreacion();
 	}
 
 	

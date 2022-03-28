@@ -12,7 +12,7 @@ public class Principal {
 			System.out.println(e1.getMessage());
 		}
 		
-		//añado un pueblo
+		//aï¿½ado un pueblo
 		try {
 			pr1.addPueblo("brenes", "11111", 4, 59, 88);
 		} catch (ProvinciaException | PuebloException e) {
@@ -20,15 +20,15 @@ public class Principal {
 		}
 		
 		
-		//añado otro pueblo
+		//aÃ±ado otro pueblo
 		try {
 			pr1.addPueblo("santiago", "22222", 10, 20, 156);
 		} catch (ProvinciaException | PuebloException e) {
 			System.out.println(e.getMessage());
 		}
-		System.out.println(pr1.listadoNombresPueblos());
-		System.out.println(pr1.delPueblo("brsenes"));
-		System.out.println(pr1.listadoNombresPueblos());
+		System.out.println(pr1.delPueblo("santiago"));
+		
+		
 	}
 
 }

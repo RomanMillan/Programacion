@@ -111,10 +111,23 @@ public class Pueblo implements Comparable<Pueblo> {
 				+ ", reantaPerCapita=" + rentaPerCapita + ", superficie=" + superficie + "]\n";
 	}
 
+	//ordenar por nombre
 	@Override
 	public int compareTo(Pueblo o) {
-		// TODO Auto-generated method stub
-		return 0;
+//		if(this.nombre.compareToIgnoreCase(o.getNombre())<0) {
+//			return -1;
+//		}else if(this.nombre.compareToIgnoreCase(o.getNombre())>0){
+//			return 1;
+//		}
+//		return 0;
+		
+		if (o == null) {
+			return -1;
+		}
+		return this.nombre.compareToIgnoreCase(o.getNombre());
+		
 	}
 
 }
+
+

@@ -1,7 +1,9 @@
 package com.jacaranda.utilities;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
+
 
 public class Provincia {
 
@@ -21,7 +23,7 @@ public class Provincia {
 	}
 
 	// -----Metodos
-	// añade pueblos a la lista
+	// aï¿½ade pueblos a la lista
 	public boolean addPueblo(String nombre, String codigo, int numHabitantes, double rentaPerCapita, double superficie)
 			throws ProvinciaException, PuebloException {
 		boolean anadido = false;
@@ -53,13 +55,14 @@ public class Provincia {
 	// ver si existe el pueblo
 	private boolean existePueblo(String nombre) {
 		boolean existe = false;
-		String nombreAmirar = nombre.toUpperCase();
+		Pueblo p1;
 
 		// miramos si el nombre del pueblo esta en la lista de pueblos
-		for (Pueblo p : listaPueblos) {
-			if (p.getNombre().equals(nombreAmirar)) {
+		Iterator<Pueblo> p = listaPueblos.iterator();
+		while(p.hasNext() && !existe) {
+			p1 = p.next();
+			if(p1.getNombre().equals(nombre.toUpperCase()))
 				existe = true;
-			}
 		}
 		return existe;
 	}
@@ -83,20 +86,40 @@ public class Provincia {
 		return nombresPueblos.toString();
 	}
 	
+	//borra el pueblo buscado
 	public boolean delPueblo(String nombre) {
 		boolean borrado = false;
 		Pueblo p1=null;
-		for(Pueblo p: listaPueblos) {
-			if(p.getNombre().equals(nombre.toUpperCase())) {
-				p1 = p;
+		Iterator<Pueblo> p = listaPueblos.iterator();
+		while(p.hasNext()&& !borrado) {
+			p1 = p.next();
+			if(p1.getNombre().equalsIgnoreCase(nombre)) {
+				listaPueblos.remove(p1);
+				borrado = true;
 			}
-		}
-		
-		if(listaPueblos.remove(p1)) {
-			borrado = true;
 		}
 		return borrado;
 	}
+	
+	//muestra la informacion del pueblo buscado
+		public String getInformacionPueblo(String nombre) {
+			Pueblo p1=null;
+			boolean encontrado = false;
+			if(nombre== null) {
+				return null;
+			}
+			Iterator<Pueblo> p = listaPueblos.iterator();
+			while (p.hasNext()&& !encontrado) {
+				p1 = p.next();
+				if(p1.getNombre().equals(nombre.toUpperCase())) {
+					encontrado = true;
+				}
+			}
+			if(encontrado)
+				return p1.toString();
+			else
+				return null;
+		}
 	
 	// -----Getter and Setter
 	public int getNumeroHabitantes() {
@@ -171,6 +194,8 @@ public class Provincia {
 		return rentaPerCapita;
 	}
 
+	
+	
 	private void setCodigo(String codigo) throws ProvinciaException {
 		if (codigo.length() < 2) {
 			throw new ProvinciaException("El codigo tiene que tener almenos 2 caracteres");

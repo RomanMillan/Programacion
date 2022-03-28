@@ -17,7 +17,7 @@ public class Provincia {
 	// -----Constructor
 	public Provincia(String nombre, String codigo) throws ProvinciaException {
 		super();
-		this.nombre = nombre.toUpperCase();
+		setNombre(nombre);
 		setCodigo(codigo);
 		listaPueblos = new HashSet<Pueblo>();
 	}
@@ -190,6 +190,13 @@ public class Provincia {
 		return nombre;
 	}
 
+	private void setNombre(String nombre) throws ProvinciaException {
+		if(nombre == null) {
+			throw new ProvinciaException("El nombre no puede ser nulo");
+		}
+		this.nombre = nombre.toUpperCase();
+	}
+	
 	public double getRentaPerCapita() {
 		return rentaPerCapita;
 	}
@@ -197,8 +204,11 @@ public class Provincia {
 	
 	
 	private void setCodigo(String codigo) throws ProvinciaException {
-		if (codigo.length() < 2) {
-			throw new ProvinciaException("El codigo tiene que tener almenos 2 caracteres");
+		if(codigo == null) {
+			throw new ProvinciaException("El codigo no puede ser nulo");
+		}
+		if (codigo.length() < 2 || codigo.length()>=3) {
+			throw new ProvinciaException("El codigo tiene que ser de 2 caracteres");
 		} else {
 			for (int i = 0; i < codigo.length() - 1; i++) {
 				if (codigo.charAt(i) < 48 || codigo.charAt(i) > 57) {

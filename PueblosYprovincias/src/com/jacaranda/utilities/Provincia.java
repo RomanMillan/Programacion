@@ -46,17 +46,20 @@ public class Provincia {
 				this.superficie += superficie;
 				anadido = true;
 			} catch (PuebloException e) {
-				System.out.println(e.getMessage());
+				throw new ProvinciaException(e.getMessage());
 			}
 		}
 		return anadido;
 	}
 
 	// ver si existe el pueblo
-	private boolean existePueblo(String nombre) {
+	private boolean existePueblo(String nombre) throws ProvinciaException {
 		boolean existe = false;
 		Pueblo p1;
-
+		if(nombre ==null) {
+			throw new ProvinciaException("El nombre no puede ser nulo");
+		}
+		
 		// miramos si el nombre del pueblo esta en la lista de pueblos
 		Iterator<Pueblo> p = listaPueblos.iterator();
 		while(p.hasNext() && !existe) {
@@ -126,7 +129,7 @@ public class Provincia {
 		return numeroHabitantes;
 	}
 
-	public boolean setNumeroHabitantes(String nombre , int numeroHabitantes) {
+	public boolean setNumeroHabitantes(String nombre , int numeroHabitantes) throws ProvinciaException {
 		boolean cambiado=false;
 		for(Pueblo p: listaPueblos) {
 			int habitantesAcambiar= p.getNumeroHabitantes() -numeroHabitantes;
@@ -136,7 +139,7 @@ public class Provincia {
 					try {
 						p.setNumeroHabitantes(p.getNumeroHabitantes()-habitantesAcambiar);
 					} catch (PuebloException e) {
-						System.out.println(e.getMessage());
+						throw new ProvinciaException(e.getMessage());
 					}
 					cambiado = true;
 				}else if(p.getNumeroHabitantes()<numeroHabitantes) {
@@ -144,7 +147,7 @@ public class Provincia {
 					try {
 						p.setNumeroHabitantes(p.getNumeroHabitantes()+habitantesAcambiar);
 					} catch (PuebloException e) {
-						System.out.println(e.getMessage());
+						throw new ProvinciaException(e.getMessage());
 					}
 					cambiado = true;
 				}
@@ -158,7 +161,7 @@ public class Provincia {
 	}
 
 
-	public boolean setSuperficie(String nombre, double superficie) {
+	public boolean setSuperficie(String nombre, double superficie) throws ProvinciaException {
 		boolean cambiado= false;
 		for(Pueblo p: listaPueblos) {
 			if(p.getNombre().equals(nombre.toUpperCase())) {
@@ -169,7 +172,7 @@ public class Provincia {
 					try {
 						p.setSuperficie(p.getSuperficie()-superficeAcambiar);
 					} catch (PuebloException e) {
-						System.out.println(e.getMessage());
+						throw new ProvinciaException(e.getMessage());
 					}
 					cambiado = true;	
 				}else if(p.getSuperficie()<superficie) {
@@ -177,7 +180,7 @@ public class Provincia {
 					try {
 						p.setSuperficie(p.getSuperficie()+superficeAcambiar);
 					} catch (PuebloException e) {
-						System.out.println(e.getMessage());
+						throw new ProvinciaException(e.getMessage());
 					}
 					cambiado = true;
 				}

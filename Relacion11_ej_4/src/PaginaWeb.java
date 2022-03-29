@@ -1,4 +1,5 @@
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class PaginaWeb {
 
@@ -16,7 +17,7 @@ public class PaginaWeb {
 	public PaginaWeb(String url, LocalDateTime fecha) throws PaginaWebException {
 		super();
 		setUrl(url);
-		this.fecha = fecha;
+		setFecha(fecha);
 	}
 
 	
@@ -27,7 +28,7 @@ public class PaginaWeb {
 
 	public void setUrl(String url) throws PaginaWebException {
 		if(url == null || url.isEmpty()) {
-			throw new PaginaWebException("La URL no pude estár en blanco o ser nulla");
+			throw new PaginaWebException("La URL no pude estar en blanco o ser nulla");
 		}
 		this.url = url;
 	}
@@ -36,9 +37,36 @@ public class PaginaWeb {
 		return fecha;
 	}
 
-	public void setFecha(LocalDateTime fecha) {
+	public void setFecha(LocalDateTime fecha) throws PaginaWebException {
+		if(fecha == null) {
+			throw new PaginaWebException("La fecha no puede ser nula");
+		}
 		this.fecha = fecha;
 	}
+
+	//hashCode and Equals (URL)
+	@Override
+	public int hashCode() {
+		return Objects.hash(url);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PaginaWeb other = (PaginaWeb) obj;
+		return Objects.equals(url, other.url);
+	}
+
+	@Override
+	public String toString() {
+		return "PaginaWeb [url=" + url + ", fecha=" + fecha + "] \n";
+	}
+	
 	
 	
 }

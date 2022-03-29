@@ -114,13 +114,6 @@ public class Pueblo implements Comparable<Pueblo> {
 	//ordenar por nombre
 	@Override
 	public int compareTo(Pueblo o) {
-//		if(this.nombre.compareToIgnoreCase(o.getNombre())<0) {
-//			return -1;
-//		}else if(this.nombre.compareToIgnoreCase(o.getNombre())>0){
-//			return 1;
-//		}
-//		return 0;
-		
 		if (o == null) {
 			return -1;
 		}

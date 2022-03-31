@@ -14,7 +14,7 @@ public class Historial {
 	}
 	
 	//---Metodos
-	//añade una pagina web al historial de busquedas
+	//aï¿½ade una pagina web al historial de busquedas
 	public void addPaginaWeb(String url, LocalDateTime fecha) throws HistorialException {
 		PaginaWeb pw;
 		for(PaginaWeb p: listaPaginasWebs) {
@@ -40,23 +40,27 @@ public class Historial {
 	//consulta el historial de un dia especifico.
 	public String consultarHistorialUnDia(LocalDateTime fecha) {
 		PaginaWeb pweb=null;
-		boolean encontrado =false;
 		StringBuilder resultado = new StringBuilder();
+		boolean salir = false;
 		
+		//buscamos la pagina web
 		Iterator<PaginaWeb> p = listaPaginasWebs.iterator();
-		while(p.hasNext()&& !encontrado) {
+		while(p.hasNext()&& !salir) {
 			pweb = p.next();
+			
+			if(pweb.getFecha().isAfter(fecha)) {
+				salir = true;
+			}
+			
 			if(pweb.getFecha().equals(fecha)) {
-				encontrado = true;
+				resultado.append(pweb.toString()+"\n");
 			}
 		}
-		if(encontrado) {
-			resultado.append(pweb.toString());
-		}
-		
+		//si ha sido encontrada se muestra la informacion
 		return resultado.toString();
-		
+	
 	}
+	
 	
 	//---toString
 	@Override

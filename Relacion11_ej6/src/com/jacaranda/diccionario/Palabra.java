@@ -7,12 +7,13 @@ import java.util.Set;
 public class Palabra {
 
 	private String palabra;
-	private Set<String> significado = new HashSet<>();
+	private Set<String> significado;
 	
 	//constructor
 	public Palabra(String palabra, String significado) {
 		super();
 		this.palabra = palabra;
+		this.significado = new HashSet<>();
 		this.significado.add(significado);
 	}
 

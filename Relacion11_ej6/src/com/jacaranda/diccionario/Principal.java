@@ -10,6 +10,7 @@ public class Principal {
 		int opc;
 		String palabra, significado;
 		Palabra p;
+		PalabrasEmpiezan pE;
 		Diccionario d = new Diccionario();
 		
 		do {
@@ -17,12 +18,14 @@ public class Principal {
 			opc = leerInt("Inserta una opcion: ");
 			
 			switch (opc) {
-			//añadir palabra en el diccionario
+			//aï¿½adir palabra en el diccionario
 			case 1: {
-				palabra = leerString("Inserte el nombre de la palabra: ");
-				significado = leerString("Inserte el significado de la palabra: ");
-				p = new Palabra(palabra, significado);
-				d.agregarPalabra(p);
+				
+				pE = new PalabrasEmpiezan('A');
+				pE.addPalabra("Andar", "noser esnf");
+				pE.addPalabra("Andar", "mmmmmm");
+				System.out.println(pE.toString());
+				
 				break;
 			}
 			
@@ -62,10 +65,10 @@ public class Principal {
 	
 	public static void menu() {
 		System.out.println("\n"
-				+ "1. Añadir palabra.\n"
+				+ "1. Aï¿½adir palabra.\n"
 				+ "2. Buscar palabra en diccionario\n"
 				+ "3. Borrar una palabra del diccionario\n"
-				+ "4. Listado de palabras que empiecen por …\n"
+				+ "4. Listado de palabras que empiecen por ï¿½\n"
 				+ "5. Salir");
 	}
 

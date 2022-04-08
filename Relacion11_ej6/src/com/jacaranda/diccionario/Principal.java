@@ -8,9 +8,8 @@ public class Principal {
 	public static void main(String[] args) {
 		
 		int opc;
-		String palabra, significado;
-		Palabra p;
-		PalabrasEmpiezan pE;
+		String palabra;
+		PalabrasEmpiezan pE = null;
 		Diccionario d = new Diccionario();
 		
 		do {
@@ -18,12 +17,15 @@ public class Principal {
 			opc = leerInt("Inserta una opcion: ");
 			
 			switch (opc) {
-			//a�adir palabra en el diccionario
+			//anadir palabra en el diccionario
 			case 1: {
 				
-				pE = new PalabrasEmpiezan('A');
+				d.addListaPalabrasEmpiezan('A');
 				pE.addPalabra("Andar", "noser esnf");
 				pE.addPalabra("Andar", "mmmmmm");
+				pE.addPalabra("Anchoa", "bla bla");
+				d.addListaPalabrasEmpiezan('B');
+				pE.addPalabra("Boca", "bla bla");
 				System.out.println(pE.toString());
 				
 				break;
@@ -31,22 +33,21 @@ public class Principal {
 			
 			//buscar palabra en el diccionario
 			case 2: {
-				palabra = leerString("Inerte la palabra a buscar: ");
-				System.out.println(d.buscarPalabra(palabra));
+
 				break;
 			}
 			
 			//borrar una palabra del diccionario
 			case 3: {
 				palabra = leerString("Inserte la palabra a borrar: ");
-				d.borrarPalabra(palabra);
+				pE.delPalabra(palabra);
+				System.out.println(pE.toString());
 				break;
 			}
 			
 			//listado de palabras que empiecen por ...
 			case 4: {
-				palabra = leerString("Inserta la inicial a buscar: ");
-				System.out.println(d.listaInicio(palabra));
+				
 				break;
 			}
 			

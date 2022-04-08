@@ -33,22 +33,27 @@ public class PalabrasEmpiezan {
 				listaPalabras.add(p);
 			}else {
 				aux.setSignificado(significado);
-				
 			}
 		}
 	}
 	
 	public void delPalabra(String palabra) {
-		if(listaPalabras.contains(palabra)) {
-			
-		}
+		Iterator<Palabra> puntero = listaPalabras.iterator();
+		Palabra aux = null;
+		boolean salir = false;
+		
+		//mirar si la palabra esta y borrarla
+		while(puntero.hasNext()&&!salir) {
+			aux = puntero.next();
+			if(aux.getPalabra().equals(palabra)) {
+				salir = true;
+				listaPalabras.remove(aux);
+			}
+		}	
 	}
 
 	@Override
 	public String toString() {
 		return "PalabrasEmpiezan [letra=" + letra + ", listaPalabras=" + listaPalabras + "]";
-	}
-	
-	
-	
+	}	
 }

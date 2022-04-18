@@ -26,15 +26,6 @@ public class Diccionario {
 	public void addPalabra( String palabra, String significado) {
 		PalabrasEmpiezan aux  = new PalabrasEmpiezan ( palabra.charAt(0));
 		this.palabrasEmpiezan.get(this.palabrasEmpiezan.indexOf(aux)).addPalabra(palabra, significado);
-	
-//		boolean encontrado = false;
-//		Iterator<PalabrasEmpiezan> iterador = this.palabrasEmpiezan.iterator();
-//		while (iterador.hasNext() && !encontrado) {
-//			PalabrasEmpiezan elemento = iterador.next();
-//			if (elemento.getLetra() == aux) {
-//				elenmento.addPalabra()
-//			}
-//		}
 	}
 	
 	

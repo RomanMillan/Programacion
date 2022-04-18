@@ -19,20 +19,27 @@ public class PalabrasEmpiezan {
 	public void addPalabra(String palabra, String significado) {
 		if(palabra.startsWith(letra.toString(), 0)){	
 			//mirar si la palabra esta
-			Iterator<Palabra> puntero = listaPalabras.iterator();
-			Palabra aux = null;
-			boolean salir = false;
-			while(puntero.hasNext()&&!salir) {
-				aux = puntero.next();
-				if(aux.getPalabra().equals(palabra)) {
-					salir = true;
-				}
-			}
-			if(salir == false) {
-				Palabra p = new Palabra(palabra,significado);
-				listaPalabras.add(p);
+//			Iterator<Palabra> puntero = listaPalabras.iterator();
+//			Palabra aux = null;
+//			boolean salir = false;
+//			while(puntero.hasNext()&&!salir) {
+//				aux = puntero.next();
+//				if(aux.getPalabra().equals(palabra)) {
+//					salir = true;
+//				}
+//			}
+//			if(salir == false) {
+//				Palabra p = new Palabra(palabra,significado);
+//				listaPalabras.add(p);
+//			}else {
+//				aux.setSignificado(significado);
+//			}
+			Palabra aux = new Palabra(palabra,significado);
+			int pos = listaPalabras.indexOf(aux);
+			if(pos == -1) {
+				listaPalabras.add(aux);
 			}else {
-				aux.setSignificado(significado);
+				((Palabra) listaPalabras.get(listaPalabras.indexOf(aux))).setSignificado(significado);
 			}
 		}
 	}

@@ -41,6 +41,10 @@ public class PalabrasEmpiezan {
 			}else {
 				((Palabra) listaPalabras.get(listaPalabras.indexOf(aux))).setSignificado(significado);
 			}
+		
+		}else {
+			Palabra aux = new Palabra(palabra,significado);
+			listaPalabras.add(aux);
 		}
 	}
 	

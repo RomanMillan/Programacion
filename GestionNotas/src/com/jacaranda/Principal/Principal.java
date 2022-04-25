@@ -6,8 +6,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -29,15 +31,16 @@ public class Principal {
 		leerFichero("ficheros//modulos.txt");
 		do {
 			menu();
-			System.out.println("Insertar una opcion: ");
-			opc = Integer.parseInt(teclado.nextLine());
+			opc = leeInt("Inserte una opcion: ");
 			switch (opc) {
 			// alta alumnado
 			case 1: {
 				System.out.println("escribir nombre: ");
 				String nombre = teclado.nextLine();
+				
 				System.out.println("Introduce el dni: ");
 				String dni = teclado.nextLine();
+				
 				System.out.println("Inserte el correo: ");
 				String correoE = teclado.nextLine();
 				listaAlumnado.add(new Alumnado(nombre, dni,correoE));
@@ -47,16 +50,60 @@ public class Principal {
 			case 2: {
 				System.out.println("escribir nombre: ");
 				String nombre = teclado.nextLine();
+				//TODO arreglar lo del numero.
 				System.out.println("Introduce numero de horas: ");
-				int horas = teclado.nextInt();
+				int horas = ;
+				
 				System.out.println("Inserte los creditos: ");
 				int creditos = teclado.nextInt();
+				
 				listaModulos.add(new Modulo(nombre,horas,creditos));
 				break;
 			}
 			// Registrar nota
+			/*
+			 * 1. pedimos el dni del alumno, el nombre del modulo y la nota.
+			 * 2. buscamos el objeto del alumno (dni) y el objeto modulo (nombre)
+			 * 3. Creamos el objeto nota y lo guardamos en la lista de notas 
+			 * 4. Si no es posible dará un mensaje de no encontrado.
+			 * */
 			case 3: {
-
+				Nota nota = null;
+				LocalDate fecha=null;
+				
+				System.out.println("DNI del alumno: ");
+				String dni = teclado.nextLine();
+				System.out.println("Nombre del modulo: ");
+				String nombre = teclado.nextLine();
+				System.out.println("Inserte la nota: ");
+				double puntos = teclado.nextDouble();
+				
+				Iterator<Alumnado> puntero = listaAlumnado.iterator();
+				Alumnado aux = null;
+				boolean salir = false;
+				while(puntero.hasNext() && !salir) {
+					aux = puntero.next();
+					if(aux.getDni().equals(dni)) {
+						salir = true;
+					}
+				}
+				
+				Iterator<Modulo> puntero2 = listaModulos.iterator();
+				Modulo aux2 = null;
+				boolean salir2 = false;
+				while(puntero2.hasNext()) {
+					aux2 = puntero2.next();
+					if(aux2.getNombre().equals(nombre)) {
+						salir2 = true;
+					}
+				}
+				
+				if(salir && salir2) {
+					nota = new Nota(puntos,fecha.now(),aux,aux2);
+					listaNotas.add(nota);
+				}else {
+					System.out.println("Datos no encontrados");
+				}				
 				break;
 			}
 			// Listar notas todos los alumnos
@@ -94,6 +141,12 @@ public class Principal {
 				+ "4. Listar notas todos los alumnos \n" + "5. Listar todos los alumnos \n" + "6. Salir");
 	}
 
+	public static int leeInt(String texto) {
+		System.out.println(texto);
+		return Integer.parseInt(teclado.nextLine());
+	}
+	
+	
 	//lee un fichero y lo carga en un arraylist (ALUMNO)
 	private static void leerFichero(String nombreFichero) {
 		String linea;
@@ -157,9 +210,9 @@ public class Principal {
 				while (linea != null) {
 					
 					String[] campos = linea.split(",");
-					 int entero = Integer.parseInt(campos[1]);
-					 int entero2 = Integer.parseInt(campos[2]);
-						Modulo mod = new Modulo(campos[0], entero,entero2);
+					 int horas = Integer.parseInt(campos[1]);
+					 int creditos = Integer.parseInt(campos[2]);
+						Modulo mod = new Modulo(campos[0], horas,creditos);
 						listaModulos.add(mod);
 					linea = filtroLectura.readLine();
 				}
@@ -193,6 +246,39 @@ public class Principal {
 				System.out.println(e.getMessage());
 			}
 			}
-	
-
+//	
+//
+//		
+//		//lee un fichero y lo carga en un arraylist (NOTA)
+//				private static void leerFicheroNota(String nombreFichero) {
+//					String linea;
+//					try {
+//						//insertamos todo el fichero en un buffer 
+//						FileReader flujoLectura = new FileReader(nombreFichero);
+//						BufferedReader filtroLectura = new BufferedReader(flujoLectura);
+//						
+//						//lee linea por linea y lo imprime
+//						linea = filtroLectura.readLine();	
+//						
+//						while (linea != null) {
+//							String[] campos = linea.split(",");
+//							 int puntos = Integer.parseInt(campos[0]);
+//							 int entero2 = Integer.parseInt(campos[1]);
+//								Nota not = new Nota(puntos, entero,entero2);
+//								listaModulos.add(not);
+//							linea = filtroLectura.readLine();
+//						}
+//
+//						//cerramos el fichero y buffer
+//						filtroLectura.close();
+//						flujoLectura.close();
+//						
+//					} catch (FileNotFoundException e) {
+//						System.out.println("No existe el fichero " + nombreFichero);
+//					} catch (IOException e) {
+//						System.out.println(e.getMessage());
+//					}
+//				}
+//		
+		
 }

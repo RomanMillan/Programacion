@@ -59,6 +59,11 @@ public class Nota {
 		Nota other = (Nota) obj;
 		return Objects.equals(alumno, other.alumno) && Objects.equals(fecha, other.fecha)
 				&& Objects.equals(modulo, other.modulo);
+	}
+
+	@Override
+	public String toString() {
+		return "Nota [nota=" + nota + ", fecha=" + fecha + ", alumno=" + alumno + ", modulo=" + modulo + "]";
 	} 
 	
 	

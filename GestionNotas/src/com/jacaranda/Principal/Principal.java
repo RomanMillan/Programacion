@@ -28,34 +28,26 @@ public class Principal {
 
 		int opc;
 		leerFichero("ficheros//alumnado.txt");
-		leerFichero("ficheros//modulos.txt");
+		leerFicheroModulo("ficheros//modulos.txt");
+		leerFicheroNota("ficheros//notas.txt");
 		do {
 			menu();
 			opc = leeInt("Inserte una opcion: ");
 			switch (opc) {
 			// alta alumnado
 			case 1: {
-				System.out.println("escribir nombre: ");
-				String nombre = teclado.nextLine();
+				String nombre = leeString("escribir nombre: ");
+				String dni = leeString("escribir el dni: ");
+				String correoE = leeString("Inserte el correo: ");
 				
-				System.out.println("Introduce el dni: ");
-				String dni = teclado.nextLine();
-				
-				System.out.println("Inserte el correo: ");
-				String correoE = teclado.nextLine();
 				listaAlumnado.add(new Alumnado(nombre, dni,correoE));
 				break;
 			}
 			// Registrar modulo
 			case 2: {
-				System.out.println("escribir nombre: ");
-				String nombre = teclado.nextLine();
-				//TODO arreglar lo del numero.
-				System.out.println("Introduce numero de horas: ");
-				int horas = ;
-				
-				System.out.println("Inserte los creditos: ");
-				int creditos = teclado.nextInt();
+				String nombre = leeString("escribir nombre: ");
+				int horas = leeInt("Inserte horas");
+				int creditos = leeInt("Inserte los creditos: ");
 				
 				listaModulos.add(new Modulo(nombre,horas,creditos));
 				break;
@@ -71,12 +63,9 @@ public class Principal {
 				Nota nota = null;
 				LocalDate fecha=null;
 				
-				System.out.println("DNI del alumno: ");
-				String dni = teclado.nextLine();
-				System.out.println("Nombre del modulo: ");
-				String nombre = teclado.nextLine();
-				System.out.println("Inserte la nota: ");
-				double puntos = teclado.nextDouble();
+				String dni = leeString("DNI alumno: ");
+				String nombre = leeString("Nombre del modulo: ");
+				double puntos = leeDouble("Insertar la nota: ");
 				
 				Iterator<Alumnado> puntero = listaAlumnado.iterator();
 				Alumnado aux = null;
@@ -125,6 +114,7 @@ public class Principal {
 				System.out.println("Programa finalizado");
 				escribirEnFichero("ficheros//alumnado.txt");
 				escribirEnFicheroModulos("ficheros//modulos.txt");
+				escribirEnFicheroNota("ficheros//notas.txt");
 				break;
 			}
 			default:
@@ -146,6 +136,16 @@ public class Principal {
 		return Integer.parseInt(teclado.nextLine());
 	}
 	
+	public static double leeDouble(String texto) {
+		System.out.println(texto);
+		return Double.parseDouble(teclado.nextLine());
+	}
+	
+	
+	public static String leeString (String texto) {
+		System.out.println(texto);
+		return teclado.nextLine();
+	}
 	
 	//lee un fichero y lo carga en un arraylist (ALUMNO)
 	private static void leerFichero(String nombreFichero) {
@@ -246,39 +246,81 @@ public class Principal {
 				System.out.println(e.getMessage());
 			}
 			}
-//	
-//
-//		
-//		//lee un fichero y lo carga en un arraylist (NOTA)
-//				private static void leerFicheroNota(String nombreFichero) {
-//					String linea;
-//					try {
-//						//insertamos todo el fichero en un buffer 
-//						FileReader flujoLectura = new FileReader(nombreFichero);
-//						BufferedReader filtroLectura = new BufferedReader(flujoLectura);
-//						
-//						//lee linea por linea y lo imprime
-//						linea = filtroLectura.readLine();	
-//						
-//						while (linea != null) {
-//							String[] campos = linea.split(",");
-//							 int puntos = Integer.parseInt(campos[0]);
-//							 int entero2 = Integer.parseInt(campos[1]);
-//								Nota not = new Nota(puntos, entero,entero2);
-//								listaModulos.add(not);
-//							linea = filtroLectura.readLine();
-//						}
-//
-//						//cerramos el fichero y buffer
-//						filtroLectura.close();
-//						flujoLectura.close();
-//						
-//					} catch (FileNotFoundException e) {
-//						System.out.println("No existe el fichero " + nombreFichero);
-//					} catch (IOException e) {
-//						System.out.println(e.getMessage());
-//					}
-//				}
-//		
+	
+
 		
+		//lee un fichero y lo carga en un arraylist (NOTA)
+				private static void leerFicheroNota(String nombreFichero) {
+					String linea;
+					try {
+						//insertamos todo el fichero en un buffer 
+						FileReader flujoLectura = new FileReader(nombreFichero);
+						BufferedReader filtroLectura = new BufferedReader(flujoLectura);
+						
+						//lee linea por linea y lo imprime
+						linea = filtroLectura.readLine();	
+						
+						while (linea != null) {
+							String[] campos = linea.split(",");
+							double puntos = Double.parseDouble(campos[0]);
+							LocalDate fecha = LocalDate.parse(campos[1]);
+							
+							Iterator<Alumnado> puntero = listaAlumnado.iterator();
+							Alumnado auxAlumno = null;
+							boolean salir = false;
+							while(puntero.hasNext()&& !salir) {
+								auxAlumno = puntero.next();
+								if(auxAlumno.getDni().equals(campos[2])) {
+									salir= true;
+								}
+							}
+							
+							
+							Iterator<Modulo> puntero2 = listaModulos.iterator();
+							Modulo auxModulo = null;
+							boolean salir2 = false;
+							while(puntero2.hasNext()&& !salir2) {
+								auxModulo = puntero2.next();
+								if(auxModulo.getNombre().equals(campos[3])) {
+									salir2= true;
+								}
+							}
+							
+							
+							Nota note = new Nota(puntos,fecha,auxAlumno,auxModulo);
+							listaNotas.add(note);
+							linea = filtroLectura.readLine();
+						}
+
+						//cerramos el fichero y buffer
+						filtroLectura.close();
+						flujoLectura.close();
+						
+					} catch (FileNotFoundException e) {
+						System.out.println("No existe el fichero " + nombreFichero);
+					} catch (IOException e) {
+						System.out.println(e.getMessage());
+					}
+				}
+		
+		//escribe la informacion en el archivo (NOTA)
+		private static void escribirEnFicheroNota(String nombre) {
+
+			try {
+				FileWriter flujoEscritura=new FileWriter(nombre);
+				PrintWriter filtroEscritura=new PrintWriter(flujoEscritura);
+			
+				//proceso el fichero
+				for(Nota note:listaNotas) {
+					filtroEscritura.println(note.getNota() + "," + note.getFecha() + ","+ note.getAlumno() + "," + note.getModulo());
+				}
+				//fin del proceso
+				filtroEscritura.close();
+				flujoEscritura.close();
+			} catch (IOException e) {
+				System.out.println(e.getMessage());
+			}
+			}
+	
+
 }

@@ -1,4 +1,4 @@
-package ejercicios;
+package Ejercicios;
 
 import java.util.Scanner;
 
@@ -14,7 +14,5 @@ public class Ej26 {
 		
 
 	}
-	//metodo que permite leer double
-	public static double leerDouble(String )
 
 }

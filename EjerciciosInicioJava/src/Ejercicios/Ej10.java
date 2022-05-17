@@ -1,6 +1,6 @@
-package ejercicios;
+package Ejercicios;
 
-/*
+/*S
  * Escribe los números del 100 al 1 utilizando la instrucción for
  * */
 public class Ej10 {

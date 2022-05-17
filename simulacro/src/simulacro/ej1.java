@@ -30,7 +30,7 @@ public class ej1 {
 			}
 			//consulta un mensaje en concreto
 			case 2:{
-			//TODO consultar mensajes
+			
 			break;	
 			}
 			//añade un nuevo mensaje

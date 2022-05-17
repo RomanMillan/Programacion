@@ -1,4 +1,4 @@
-package ejercicios;
+package Ejercicios;
 
 /*
  * Muestra los números del 1 al 100 utilizando la instrucción while (mientras)

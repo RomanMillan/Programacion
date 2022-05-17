@@ -15,38 +15,50 @@ public class Principal {
 	public static void main(String[] args) {
 		try {
 			Connection conexion = DriverManager.getConnection(
-					"jdbc:oracle:thin:@//localhost:1521/ORCLCDB.localdomain","dummy","dummy");
+					//"jdbc:oracle:thin:@//localhost:1521/ORCLCDB.localdomain","dummy","dummy"
+					"jdbc:oracle:thin:@//localhost:1521/xe","dummy","dummy" //para connectarme en casa
+					);
+			
+			//para ver si tiene conexion con la BD
 			DatabaseMetaData infoBD= conexion.getMetaData();
 			System.out.println("Base de datos: " + infoBD.getDatabaseProductName());
 			System.out.println("Version: " + infoBD.getDatabaseProductVersion());
 			
+			//llamamos a los metodos
 			addUser(conexion);
-			//consultar(conexion);
+			consultar(conexion);
 			
+			//cerramos la conexion con la BD
 			conexion.close();
 		} catch (SQLException e) {
 			System.out.println(e);
 		}
 	}
 	
+	//metodo que inserta datos a la tabla departamento del esquema dummy
 	public static void addUser(Connection conexion) throws SQLException {
 		String nombre_dep;
 		int numero_dep, presupuesto_dep;
 		
-		System.out.println("Inserete numero:  ");
+		//pedimos los datos a insertar
+		System.out.print("Inserete numero:  ");
 		numero_dep = Integer.parseInt(teclado.nextLine());
-		System.out.println("Inserte nombre: ");
+		System.out.print("Inserte nombre: ");
 		nombre_dep = teclado.nextLine();
-		System.out.println("Inserte el presupuesto: ");
+		System.out.print("Inserte el presupuesto: ");
 		presupuesto_dep = Integer.parseInt(teclado.nextLine());
 		
+		//establecemos la conexion
 		Statement instruccion = conexion.createStatement();
 		
+		//creamos la query o instruccion (donde insertamos los datos a la BD)
 		String query = "insert into departamento values(" + numero_dep + ",'" + 
 		nombre_dep + "'," + presupuesto_dep + ")";
 		
+		//mostramos la query generada.
 		System.out.println(query);
 		
+		//mostramos un mensaje de como se ha desarrollado la query.
 		if(instruccion.executeUpdate(query)==0) {
 			System.out.println("error en la sencentia: " + query);
 		}else {
@@ -54,6 +66,7 @@ public class Principal {
 		}
 	}
 	
+	//metodo que realiza una consulta de los datos de la tabla departamento del esquema dummy
 	public static void consultar(Connection conexion) throws SQLException {
 		Statement instruccion = conexion.createStatement();
 		String sentencia = "select * from departamento";
@@ -63,7 +76,7 @@ public class Principal {
 			System.out.println(resultado.getString("numero_dep"));
 			System.out.println(resultado.getString("nombre_dep"));
 			System.out.println(resultado.getString("presupuesto_dep"));
-			System.out.println("********");
+			System.out.println("-------------");
 		}
 	}
 

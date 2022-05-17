@@ -38,6 +38,5 @@ public class Utilidades {
 			System.out.println("Array string destino" + Arrays.toString(array2Int));
 			
 			
-			System.out.println("Array string origen" + Utilidades.toString(array1Int));
 		}
 	}

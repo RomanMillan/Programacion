@@ -1,4 +1,4 @@
-package ejercicios;
+package Ejercicios;
 
 /*
  * Calcula y escribe los números múltiplos de 5 (0 a 100) utilizando un bucle for.

@@ -46,7 +46,7 @@ public class Jugador {
 	
 	//TODO consegur la fuerza
 	private int getFuerza() {
-		
+		return 5;
 	}
 	
 }

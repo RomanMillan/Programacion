@@ -72,7 +72,6 @@ public class Principal {
 		
 		System.out.println(listaCanciones2.toString());
 		
-		
 		//LinkedList
 		/*
 		 * - Tiene un doble puntero (apunta al objeto anterior y siguente) 

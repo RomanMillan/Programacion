@@ -274,8 +274,6 @@ public class Principal {
 					+ aux.getHorasJugadas() + "," + aux.getGenero());
 					}
 				}
-			
-
 			//fin del proceso
 			filtroEscritura.close();
 			flujoEscritura.close();

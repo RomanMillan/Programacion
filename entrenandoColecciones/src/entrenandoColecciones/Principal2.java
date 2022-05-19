@@ -59,6 +59,16 @@ public class Principal2 {
 		System.out.println("----------------");
 		//System.out.println(listaCanciones2.get("A"));
 
+		
+		//recorrer un HashMap
+		for(String clave:listaCanciones2.keySet()) {
+			Cancion auxC;
+			auxC = listaCanciones2.get(clave);
+		}
+		
+		
+		
+		
 		//--------Añadir mas canciones a una misma clave.
 
 		HashMap<String,HashSet<Cancion>> listaCanciones3 = new HashMap<>();
@@ -75,6 +85,8 @@ public class Principal2 {
 		
 		System.out.println(listaCanciones3);
 
+		
+		
 		
 		//--borrar una cancion de un album
 		HashSet<Cancion> auxLista = new HashSet<>();

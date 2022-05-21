@@ -1,7 +1,14 @@
 package PlataformaOnline.jacaranda.com;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 
 
 public class Series {
@@ -122,8 +129,20 @@ public class Series {
 	 * @throws SerieException
 	 */
 	public  String listadoOrdenadoSeriesDeUnTema( Tema tema)  throws SerieException {
-		return null;
+		StringBuilder r = new StringBuilder();
+		ArrayList<Serie> listado = new ArrayList<Serie>();
+		for(Serie serie:mapSeries.values()) {
+			if(serie.getTema().equals(tema)) {
+				listado.add(serie);
+			}
+		}
+		Collections.sort(listado,new OrdenadoPorTema());
+		for(Serie serie:listado) {
+			r.append(serie.toString()+"\n");
+		}
+		return listado.toString();
 	}
+	
 	
 	//metodo para sacar las series
 	public HashSet<Serie> sacarSeries() {
@@ -147,5 +166,36 @@ public class Series {
 		return s.toString();
 	}
 	
+	public void escribirEnFicheroTemporada(String nombre) {
+		try {
+			FileWriter flujoEscritura=new FileWriter(nombre);
+			PrintWriter filtroEscritura=new PrintWriter(flujoEscritura);
+			
+			for(Serie serie:mapSeries.values()) {
+				filtroEscritura.print(serie.getTemporadas());
+			}
+			filtroEscritura.close();
+			flujoEscritura.close();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
 	
+	public void escribirEnFicheroCapitulos(String nombre) {
+		try {
+			FileWriter flujoEscritura=new FileWriter(nombre);
+			PrintWriter filtroEscritura=new PrintWriter(flujoEscritura);
+			
+			for(Serie serie:mapSeries.values()) {
+				filtroEscritura.print(serie.getCapitulosS());
+			}
+			filtroEscritura.close();
+			flujoEscritura.close();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+
+
 }

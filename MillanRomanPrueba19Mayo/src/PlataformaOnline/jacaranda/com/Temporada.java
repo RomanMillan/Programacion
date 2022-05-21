@@ -129,18 +129,37 @@ public class Temporada {
 		return notaMedia;
 	}
 	
+	public int compareTo(Temporada o) {
+		return -(int) (this.getNotaMedia() - o.getNotaMedia());
+	}
+	
 	public String toString() {
 		String info;
 	
 		info=nombreTemporada+   " Número de capitulos " + capitulos.size() + 
-					" Nota media " + getNotaMedia();
+					" Nota media " + getNotaMedia()+ "\n";
 		return info;
 		
 	}
+
+	public int getNumeroCapitulos() {
+		return capitulos.size();
+	}
 	
-	//este es un metodo creado por mi para hacer mis pruebas.
-	public String toStringMio() {
-		return capitulos.toString();
+	public int getNumeroOpiniones() {
+		return numeroOpiniones;
+	}
+	
+	public int getSumaOpiniones() {
+		return sumaOpiniones;
+	}
+	
+	public String getCapitulos() {
+		StringBuilder s = new StringBuilder();
+		for(String c: capitulos) {
+			s.append(c+",");
+		}
+		return s.toString();
 	}
 
 	@Override

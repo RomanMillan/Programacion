@@ -17,18 +17,20 @@ import PlataformaOnline.jacaranda.com.Temporada;
 public class Main {
 
 	public static HashSet<Serie> listaSeries = new HashSet<>();
-	public static Series series = new Series();	
+		
 	
 	public static void main(String[] args) {
-		
+
 		Series series = new Series();		
 		try {
 			series.annadirSerie("This is us", 2015, Tema.DRAMA);
 			series.annadirSerie("Friends", 1990, Tema.COMEDIA);
 			series.annadirSerie("Dallas", 1970, Tema.INTRIGA);
+			
 			series.annadirTemporada("This is us", "Empezamos");
 			series.annadirTemporada("This is us", "Seguimos");
 			series.annadirTemporada("This is us", "Finalizamos");
+			
 			series.annadirCapituloTemporada("This is us", "Empezamos", "La familia");
 			series.annadirCapituloTemporada("This is us", "Empezamos", "El problema");
 			series.annadirCapituloTemporada("This is us", "Empezamos", "Los niños");
@@ -38,45 +40,23 @@ public class Main {
 			//System.out.println(series.numeroDeTemporadasDeUnaSerie("This is us"));
 			//series.modificarTema("This is us", Tema.DRAMA);
 			
+			series.annadirSerie("SS", 2016, Tema.DRAMA);
+			series.annadirSerie("MM", 2010, Tema.DRAMA);
+			series.annadirSerie("VV", 2009, Tema.DRAMA);
 			
-			//System.out.println(series.toString());
-			
-			listaSeries.addAll(series.sacarSeries());
-			
-			//System.out.println(listaSeries.toString());
-			
-			//mis pruebas de Temporada.
-			/*
-			Temporada t1 = new Temporada("Temp");
-			t1.annadirCapitulo("c1");
-			t1.annadirCapitulo("c2");
-			t1.annadirCapitulo("c3");
-			t1.annadirCapitulo("c4");
-			t1.annadirCapitulo("c5");
-			t1.annadirCapitulo("c6");
-			t1.annadirCapitulo("c7");
-			*/
-			//System.out.println(t1.primerCapituloQueContieneEstaPalabara("dd"));
-			
-			//t1.anadirCapituloDespues("c5_1", "c5");
-			//System.out.println(t1.toStringMio());
-			
-			//pruebas Serie
-//			Serie s1 = new Serie("Serie1", 2010, Tema.COMEDIA);
-//			
-//			s1.annadirTemporada("t1");
-//			System.out.println(s1.toString2());
-//			s1.annadirTemporada("t2");
-//			System.out.println(s1.toString2());
-
-			//pruebas Series
-
+			System.out.println(series.listadoOrdenadoSeriesDeUnTema(Tema.DRAMA));
 			
 			
-			escribirEnFicheroSeries("ficheros//FicheroSeries.csv");
+			
+			//Escribir la informacion en los ficheros.
+			//listaSeries.addAll(series.sacarSeries());
+			//escribirEnFicheroSeries("ficheros//FicheroSeries.csv");
+			
+			//series.escribirEnFicheroTemporada("ficheros//FicheroTemporada.csv");
+			
+			//series.escribirEnFicheroCapitulos("ficheros//FicheroCapitulos.csv");
 			
 		} catch (SerieException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -104,28 +84,5 @@ public class Main {
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
-		}
-	
-	//NO me ha dado tiempo de terminarlo necesito modificarlo para temporada
-	private static void escribirEnFicheroTemporada(String nombre) {
-		try {
-			FileWriter flujoEscritura=new FileWriter(nombre);
-			PrintWriter filtroEscritura=new PrintWriter(flujoEscritura);
-		
-			//proceso el fichero
-			
-			Iterator<Serie> puntero = listaSeries.iterator();
-			Serie aux;
-			while(puntero.hasNext()) {
-				aux = puntero.next();
-				filtroEscritura.println(aux.getNombreSerie() + "," + aux.getAnno() + "," + aux.getTema());
-			}
-			//fin del proceso
-			filtroEscritura.close();
-			flujoEscritura.close();
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-		}
-		}
 	}
-
+}

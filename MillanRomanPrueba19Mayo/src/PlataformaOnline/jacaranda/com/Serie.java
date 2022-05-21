@@ -1,6 +1,8 @@
 package PlataformaOnline.jacaranda.com;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 
@@ -11,7 +13,7 @@ import java.util.Iterator;
  * */
 
 
-public class Serie {
+public class Serie{
 	private static final int ANNO_MINIMO = 1900; // Sólo se almacenrará series posteriores a 1900
 	private String nombreSerie; // Nombre de la serie
 	private int anno; //Año de la primera temporada de la serie
@@ -101,20 +103,30 @@ public class Serie {
 	 * @return
 	 */
 	public String listadoTemporadasPorNotaMedia() {
+		StringBuilder r = new StringBuilder();
+		Collections.sort(this.temporadas,new OrdenarPorNotaMedia());
+		for(Temporada temporada:this.temporadas) {
+			r.append(temporada.toString()+"\n");
+		}
 		
-		return null;
+		return r.toString();
 	}
 	
-
 	/**
 	 * Devuelve un listado de las temporadas de una serie ordenadas de menor a mayor por número de capítulos. 
 	 * De cada temporada se mostrará el nombre, número de capítulos y nota media.
 	 * @return
 	 */
 	public String listadoTemporadasPorNumeroDeCapitulos() {
-		return null;
+		StringBuilder resultado = new StringBuilder();
+		Collections.sort(this.temporadas,new OrdenarPorNumerosDeCapitulos());
+		for(Temporada temporada:this.temporadas) {
+			resultado.append(temporada.toString()+"\n");
+		}
+		return resultado.toString();
+		
 	}
-
+	
 	
 	/**
 	 * Devuelve el nombre de la Serie
@@ -185,7 +197,7 @@ public class Serie {
 	 * toString
 	 */
 	public String toString() {
-		return  "Serie " + nombreSerie + " Anno " + anno + " Tema " + tema + "Numero temporadadas " + numeroTemporadas();
+		return  "Serie " + nombreSerie + " Anno " + anno + " Tema " + tema + "Numero temporadadas " + numeroTemporadas() +"\n";
 	}
 	
 	public String toString2() {
@@ -217,6 +229,7 @@ public class Serie {
 		return true;
 	}
 
+	/*
 	public HashSet<Temporada> sacarTemporada(){
 		Iterator<Temporada> puntero = temporadas.iterator();
 		HashSet<Temporada> listaT = new HashSet<>();
@@ -227,9 +240,24 @@ public class Serie {
 		}
 		return listaT;
 	}
+	*/
 	
+	public String getTemporadas() {
+		StringBuilder s = new StringBuilder();
+		for(Temporada t: temporadas) {
+			s.append(this.nombreSerie + ","+ t.getNombre() + "," + t.getNumeroCapitulos() + "," + t.getSumaOpiniones()
+			+ "," + t.getNumeroOpiniones() + "\n");
+		}
+		return s.toString();
+	}
 	
-	
-	
+	public String getCapitulosS() {
+		StringBuilder s = new StringBuilder();
+		for(Temporada t: temporadas) {
+			
+			s.append(this.nombreSerie +","+ t.getNombre() + ","+t.getCapitulos() + "\n");
+		}
+		return s.toString();
+	}
 	
 }

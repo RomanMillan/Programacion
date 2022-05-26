@@ -25,6 +25,7 @@ public class Main {
 			switch (opc) {
 			case 1:
 				int anio = leerInt("Inserte un año: ");
+				
 				break;
 			case 2:
 				

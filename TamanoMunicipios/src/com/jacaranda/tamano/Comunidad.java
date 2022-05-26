@@ -1,6 +1,7 @@
 package com.jacaranda.tamano;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Objects;
 
 public class Comunidad {
@@ -55,7 +56,21 @@ public class Comunidad {
 		return "Comunidad [nombre=" + nombre + ", listMunicipio=" + listMunicipio + "]";
 	}
 	
-	
+	public string mostrarPorAnio(int anio) {
+		StringBuilder sB = new StringBuilder();
+		Iterator<Municipio> puntero = listMunicipio.iterator();
+		Municipio auxM;
+		String datos;
+		while(puntero.hasNext()) {
+			auxM = puntero.next();
+			auxM.getDatos();
+			
+			if(auxM.getDatos()) {
+				
+			}
+		}
+		listMunicipio.contains(sB);
+	}
 
 	
 }

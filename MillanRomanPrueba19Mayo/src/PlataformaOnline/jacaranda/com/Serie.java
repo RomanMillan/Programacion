@@ -44,17 +44,10 @@ public class Serie{
 	 */
 	public void annadirTemporada( String nombreTemporada) throws SerieException {
 		Iterator<Temporada> puntero = temporadas.iterator();
-		boolean encontrado = false;
 		Temporada auxT;
-		//compruebo si ya está agreagada la temporada
-		if(temporadas.contains(nombreTemporada)){
-			throw new SerieException("Temporada ya agregada");
-		}
-		
-		while (puntero.hasNext()&&!encontrado) {
+		while (puntero.hasNext()) {
 			auxT = puntero.next();
 			if(auxT.getNombre().equals(nombreTemporada)) {
-				encontrado = true;
 				throw new SerieException("Temporada ya agregada");
 			}
 		}

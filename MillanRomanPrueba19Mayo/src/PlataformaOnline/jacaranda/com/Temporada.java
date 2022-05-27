@@ -72,21 +72,11 @@ public class Temporada {
 	 * @throws SerieException: si no encuentra el capítulo que indica la posición para añadir.
 	 */
 	public void anadirCapituloDespues(String nombreCapituloAnnadir, String nombreCapituloAnterior) throws SerieException{
-		Iterator<String> puntero = capitulos.iterator();
-		boolean anadido = false;
-		String auxC="";
-		int cont = 0;
-		while (puntero.hasNext()&&!anadido) {
-			auxC = puntero.next();
-			cont++;
-			if(auxC.equals(nombreCapituloAnterior)) {
-				capitulos.add(cont, nombreCapituloAnnadir);
-				anadido = true;
-			}
-		}
-		
-		if(!auxC.equals(nombreCapituloAnterior)) {
+		int pos = capitulos.indexOf(nombreCapituloAnterior);
+		if (pos == -1) {
 			throw new SerieException("Capitulo no encontrado");
+		} else {
+			capitulos.add(pos + 1, nombreCapituloAnnadir);
 		}
 		
 	}
@@ -105,11 +95,11 @@ public class Temporada {
 		String auxC = "";
 		while(puntero.hasNext()&&!encontrado) {
 			auxC = puntero.next();
-			if(auxC.equals(palabra)){
+			if(auxC.contains(palabra)){
 				encontrado = true;
 			}
 		}
-		if(!auxC.equals(palabra)) {
+		if(!auxC.contains(palabra)) {
 			throw new SerieException("Capitulo no encontrado");
 		}
 			
@@ -141,6 +131,13 @@ public class Temporada {
 		return info;
 		
 	}
+	
+	public String toStringPrueba() {
+		StringBuilder s = new StringBuilder();
+		s.append(capitulos.toString());
+		return s.toString();
+	}
+	
 
 	public int getNumeroCapitulos() {
 		return capitulos.size();

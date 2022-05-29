@@ -1,6 +1,7 @@
 package com.jacaranda.tamano;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Objects;
 
 public class Municipio {
@@ -49,7 +50,7 @@ public class Municipio {
 		Municipio other = (Municipio) obj;
 		return Objects.equals(datos, other.datos) && Objects.equals(descrip, other.descrip);
 	}
-
+	
 	//toString
 	@Override
 	public String toString() {
@@ -57,8 +58,51 @@ public class Municipio {
 	}
 	
 	
+	public String datosAnio(int anio) {
+		StringBuilder s = new StringBuilder();
+		boolean encontrado = false;
+		Datos auxD;
+		Iterator<Datos> puntero = datos.iterator();
+		while(puntero.hasNext()&& !encontrado) {
+			auxD = puntero.next();
+			if(auxD.getAno()==anio) {
+				s.append(descrip + " dato: " + auxD.getDato() + "\n");
+				encontrado = true;
+			}
+		}
+		return s.toString();
+	}
 	
+	public void anadirDatos(int anio, int dato) {
+		Datos auxD;
+		boolean encontrado = false;
+		Iterator<Datos> puntero = datos.iterator();
+		while(puntero.hasNext()&& !encontrado) {
+			auxD = puntero.next();
+			if(auxD.getAno()==anio) {
+				auxD.setDato(dato);
+				encontrado = true;
+			}
+		}
+		if(!encontrado) {
+			Datos i = new Datos(anio, dato);
+			datos.add(i);
+		}
+	}
 	
-	
+	public int comprobarValor(int anio) {
+		int valorSumado = 0;
+		boolean encontrado = false;
+		Datos auxD;
+		Iterator<Datos> puntero = datos.iterator();
+		while(puntero.hasNext()&& !encontrado) {
+			auxD = puntero.next();
+			if(auxD.getAno()==anio) {
+				valorSumado += auxD.getDato();
+				encontrado = true;
+			}
+		}
+		return valorSumado;
+	}
 	
 }
